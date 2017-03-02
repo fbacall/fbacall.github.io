@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "Embedded workflow from TeSS"
+date:   2017-03-02 11:58:46 +0000
+---
+
+Found this gr8 workflow:
+
+<iframe src="https://tess.elixir-europe.org/workflows/chip-seq-workflow/embed" width="800" height="600">Should see a workflow here</iframe>
