@@ -6,9 +6,11 @@ date:   2017-12-14 12:07:00 +0000
 
 Check out my events!
 
+<div id="events">Loading?</div>
+
 <script src="https://elixirtess.github.io/list_widget/js/tess-widget-standalone.js"></script>
 <script>
-TessWidget(document.getElementById('tess-widget-dropdown-table'),
+TessWidget(document.getElementById('events'),
         'DropdownTable',
         {
             opts: {
