@@ -1,0 +1,29 @@
+---
+layout: post
+title:  "Embedded TeSS Widget"
+date:   2017-12-14 12:07:00 +0000
+---
+
+Check out my events!
+
+<script src="https://elixirtess.github.io/list_widget/js/tess-widget-standalone.js"></script>
+<script>
+TessWidget(document.getElementById('tess-widget-dropdown-table'),
+        'DropdownTable',
+        {
+            opts: {
+                columns: [{ name: 'Date', field: 'start' },
+                    { name: 'Name', field: 'title' },
+                    { name: 'Organizer', field: 'organizer' },
+                    { name: 'Location', field: 'location' }],
+                dropdowns: [{ name: 'Type', field: 'event-types' },
+                    { name: 'Country', field: 'country' },
+                    { name: 'Topic', field: 'scientific-topics' }]
+            },
+            params: {
+                q: 'Python',
+                facets: { 'country': ['United Kingdom'] }
+            }
+        });
+
+</script>
