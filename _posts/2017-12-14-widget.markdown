@@ -8,6 +8,7 @@ Check out my events!
 
 <div id="events">Loading?</div>
 
+<style src="https://elixirtess.github.io/list_widget/css/tess-widget.css"></style>
 <script src="https://elixirtess.github.io/list_widget/js/tess-widget-standalone.js"></script>
 <script>
 TessWidget(document.getElementById('events'),
