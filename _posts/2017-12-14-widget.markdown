@@ -8,10 +8,11 @@ Check out my events!
 
 <div id="events">Loading?</div>
 
-<link rel="stylesheet" property="stylesheet" href="https://elixirtess.github.io/list_widget/css/tess-widget.css">
+<link rel="stylesheet" property="stylesheet" href="https://elixirtess.github.io/list_widget/css/tess-widget.css"/>
 <script src="https://elixirtess.github.io/list_widget/js/tess-widget-standalone.js"></script>
+<div id="tess-widget-dropdown-table"></div>
 <script>
-TessWidget(document.getElementById('events'),
+TessWidget(document.getElementById('tess-widget-dropdown-table'),
         'DropdownTable',
         {
             opts: {
