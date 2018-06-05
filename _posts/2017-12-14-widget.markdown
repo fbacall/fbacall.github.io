@@ -8,26 +8,25 @@ Check out my events!
 
 <div id="events">Loading?</div>
 
-<link rel="stylesheet" property="stylesheet" itemprop="stylesheet" href="https://elixirtess.github.io/list_widget/css/tess-widget.css"/>
-<script src="https://elixirtess.github.io/list_widget/js/tess-widget-standalone.js"></script>
-<div id="tess-widget-dropdown-table"></div>
+<link rel="stylesheet" property="stylesheet" href="https://elixirtess.github.io/TeSS_widgets/css/tess-widget.css"/>
+<script async="" defer="" src="https://elixirtess.github.io/TeSS_widgets/js/tess-widget-standalone.js" onload="this.onload=function(){};initTeSSWidget()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+<div id="tess-widget-events-table"></div>
 <script>
-TessWidget(document.getElementById('tess-widget-dropdown-table'),
-        'DropdownTable',
+  function initTeSSWidget() {
+    TessWidget.Events(document.getElementById('tess-widget-events-table'),
+        'FacetedTable',
         {
             opts: {
                 columns: [{ name: 'Date', field: 'start' },
                     { name: 'Name', field: 'title' },
-                    { name: 'Organizer', field: 'organizer' },
                     { name: 'Location', field: 'location' }],
-                dropdowns: [{ name: 'Type', field: 'event-types' },
-                    { name: 'Country', field: 'country' },
-                    { name: 'Topic', field: 'scientific-topics' }]
+                allowedFacets: ['scientific-topics', 'country', 'city', 'target-audience']
             },
             params: {
                 q: 'Python',
-                facets: { 'country': ['United Kingdom'] }
+                country: ['Belgium',  'United Kingdom']
             }
-        });
-
+        }
+     );
+  }
 </script>
