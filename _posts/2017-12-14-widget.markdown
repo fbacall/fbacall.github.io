@@ -9,24 +9,23 @@ Check out my events!
 <div id="events">Loading?</div>
 
 <link rel="stylesheet" property="stylesheet" href="https://elixirtess.github.io/TeSS_widgets/css/tess-widget.css"/>
-<script async="" defer="" src="https://elixirtess.github.io/TeSS_widgets/js/tess-widget-standalone.js" onload="this.onload=function(){};initTeSSWidget()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
-<div id="tess-widget-events-table"></div>
+<script src="https://elixirtess.github.io/TeSS_widgets/js/tess-widget-standalone.js" onload="initTeSSWidgets()"></script>
+<div id="tess-widget-events-table" class="tess-widget tess-widget-faceted-table"></div>
 <script>
-  function initTeSSWidget() {
+function initTeSSWidgets() {
     TessWidget.Events(document.getElementById('tess-widget-events-table'),
         'FacetedTable',
         {
             opts: {
-                columns: [{ name: 'Date', field: 'start' },
-                    { name: 'Name', field: 'title' },
-                    { name: 'Location', field: 'location' }],
+                columns: [{name: 'Date', field: 'start'},
+                    {name: 'Name', field: 'title'},
+                    {name: 'Location', field: 'location'}],
                 allowedFacets: ['scientific-topics', 'country', 'city', 'target-audience']
             },
             params: {
                 q: 'Python',
-                country: ['Belgium',  'United Kingdom']
+                country: ['Belgium', 'United Kingdom']
             }
-        }
-     );
-  }
+        });
+}
 </script>
