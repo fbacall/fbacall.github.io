@@ -7,8 +7,7 @@ date:   2017-12-14 12:07:00 +0000
 Check out my events!
 
 <link rel="stylesheet" property="stylesheet" href="https://elixirtess.github.io/TeSS_widgets/css/tess-widget.css"/>
-<script async="" defer="" src="https://elixirtess.github.io/TeSS_widgets/js/tess-widget-standalone.js" onload="function ()  { initTeSSWidgets() }"></script>
-<div id="tess-widget-events-table" class="tess-widget tess-widget-faceted-table">Widget should appear here</div>
+<div id="tess-widget-events-table" class="tess-widget tess-widget-faceted-table"></div>
 <script>
 function initTeSSWidgets() {
     TessWidget.Events(document.getElementById('tess-widget-events-table'),
@@ -27,3 +26,4 @@ function initTeSSWidgets() {
         });
 }
 </script>
+<script async="" defer="" src="https://elixirtess.github.io/TeSS_widgets/js/tess-widget-standalone.js" onload="initTeSSWidgets()"></script>
