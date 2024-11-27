@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Util</title>
+    <style>
+        body { background: #eee; font-family: monospace; padding: 0.5em; margin: 0; font-size: 14px; }
+        .box { background: #fff; padding: 1em; display: inline-block; margin: 0.5em; }
+        label { display: block; margin-bottom: 0.5em; }
+        textarea { border: 1px solid #ddd; display: block; margin-bottom: 1em; height: 4em; width: 16em; }
+        textarea:disabled { background: #eee; }
+        textarea:last-child { margin-bottom: 0; }
+        textarea.error { background: #fee; }
+    </style>
+</head>
+<body>
+
+<script>
+const operations = {
+    charCodes: function (input) {
+        const a = input;
+        const codes = new Array(a.length);
+        for (let i = 0; i < a.length; i++) {
+          codes[i] = a.charCodeAt(i);
+        }
+        return codes.join(" ");
+    },
+
+    uriEncode: function (input) {
+        return encodeURIComponent(input);
+    },
+
+    uriDecode: function (input) {
+        return decodeURIComponent(input);
+    },
+
+    base64Encode: function (input) {
+        return btoa(input);
+    },
+
+    base64Decode: function (input) {
+        return atob(input);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    for (const [key, func] of Object.entries(operations)) {
+        const element = document.createElement('div');
+        element.className = 'box';
+
+        const title = document.createElement('label');
+        title.innerText = key;
+        element.appendChild(title);
+
+        const input = document.createElement('textarea');
+        input.type = 'text';
+        element.appendChild(input);
+
+        const output = document.createElement('textarea');
+        output.type = 'text';
+        output.readOnly = true;
+        output.disabled = true;
+        element.appendChild(output);
+
+        input.addEventListener("keyup", function () {
+            try {
+                output.value = func(input.value);
+                input.classList.remove('error');
+            } catch (e) {
+                input.classList.add('error');
+            }
+        });
+
+        document.body.appendChild(element);
+    }   
+});
+</script>
+</body>
+</html>
