@@ -15,9 +15,9 @@
             --error-border: #921a1a;
         }
 
-         *, *::before, *::after {
-  box-sizing: border-box;
-}
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
 
         body {
             background: var(--bg);
@@ -33,11 +33,6 @@
             margin: 1em auto;
             background: white;
             padding: 2em;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5em;
         }
 
         textarea {
@@ -58,23 +53,21 @@
         }
 
         #pipeline-wrapper {
-
             background: var(--bg);
             overflow: auto;
-
         }
 
         #pipeline {
-          float: left;
+            float: left;
         }
-      
+
         #clear-pipeline {
-          float: right;
-height: 2em;
+            float: right;
+            height: 2em;
         }
-    
+
         .tool {
-          margin-right: 0.25em;
+            margin-right: 0.25em;
         }
 
         .btn {
@@ -117,24 +110,48 @@ height: 2em;
         section {
             margin-bottom: 1em;
         }
+
+        .io {
+            margin-top: 0.5em;
+        }
+
+        .btn-sm {
+            font-size: 10px;
+            padding: 1px 3px;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
     </style>
 </head>
 <body>
 <div class="wrapper">
     <section id="tools"></section>
     <section>
-        <label for="input">Input</label>
+        <div>
+            <label for="input">Input</label>
+            <span class="btn btn-sm" data-copy="input" style="display: none;">Copy</span>
+            <span class="right btn btn-sm" id="clear-input">Clear</span>
+        </div>
         <textarea id="input" class="io input"></textarea>
     </section>
     <section>
         <div id="pipeline-wrapper">
-            <div class="btn" id="clear-pipeline">(Clear)</div>
+            <div class="btn" id="clear-pipeline">Clear</div>
             <div id="pipeline"></div>
         </div>
         <div id="error"></div>
     </section>
     <section>
-        <label for="output">Output</label>
+        <div>
+            <label for="output">Output</label>
+            <span class="btn btn-sm" data-copy="output" style="display: none;">Copy</span>
+        </div>
         <textarea id="output" class="io output"></textarea>
     </section>
 </div>
@@ -195,11 +212,15 @@ height: 2em;
     }
 
     function copyToClipboard(element) {
-  // Select the text field
-  element.select();
-  element.setSelectionRange(0, 99999); // For mobile devices
+        return navigator.clipboard.writeText(element.value);
+    }
 
-  document.execCommand("copy");
+    let recalcTimeout;
+    const recalcDelay = 20;
+    function queueRecalc() {
+        if (recalcTimeout)
+            clearInterval(recalcTimeout);
+        recalcTimeout = setTimeout(recalc, recalcDelay);
     }
 
     function recalc() {
@@ -240,19 +261,34 @@ height: 2em;
                     swapTool(tool);
                 }
 
-                recalc();
+                queueRecalc();
             });
 
             toolBox.appendChild(toolEl);
         }
 
-        const clearEl = document.getElementById('clear-pipeline');
-        clearEl.addEventListener('click', function () {
+        document.getElementById('clear-pipeline').addEventListener('click', function () {
             clearPipeline();
-            recalc();
+            queueRecalc();
         });
 
-        document.getElementById('input').addEventListener('keyup', recalc);
+        document.getElementById('input').addEventListener('keyup', queueRecalc);
+
+        document.getElementById('clear-input').addEventListener('click', function () {
+            document.getElementById('input').value = '';
+            queueRecalc();
+        });
+
+        if (navigator.clipboard) {
+            document.querySelectorAll('[data-copy]').forEach(function (button) {
+                button.style.display = '';
+                button.addEventListener('click', function () {
+                    copyToClipboard(document.getElementById(button.dataset.copy));
+                    button.innerText = 'Copied!';
+                    setTimeout(() => { button.innerText = 'Copy' }, 1000);
+                });
+            });
+        }
     });
 </script>
 </body>
